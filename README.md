@@ -63,11 +63,34 @@ developing your own process.
 - Add a new toy when the toy form is submitted
 
   - How I debugged:
+  - I Checked the Rails server logs in the terminal,
+
+  ```console
+  NameError (uninitialized constant ToysController::Toys):
+  app/controllers/toys_controller.rb:10:in `create'
+  Started PATCH "/toys/undefined"
+  ```
+  - Realized that `Toy` was wrongly named `Toys`
+
 
 - Update the number of likes for a toy
 
   - How I debugged:
+   - I Checked the browser console and found error:
+
+  ```console
+  Uncaught (in promise) SyntaxError: Unexpected end of JSON input
+    at ToyCard.js:27:1
+  ```
+  - It was a clear indication that it was missing ` render json: toy`
+  
+ 
 
 - Donate a toy to Goodwill (and delete it from our database)
 
   - How I debugged:
+  - There was a 404 not found on browser console and on the terminal:
+  ```console
+  ActionController::RoutingError (No route matches [DELETE] "/toys/9"):
+  ```
+  - It was missing a `:destroy` route for Delete
